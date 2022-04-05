@@ -8,10 +8,14 @@ export const writeToJsonFile = (data) => {
     console.log(`Write File: ${new Date().toISOString().replace(/[.:]/g, '-')}.json`);
 }
 
+const hourDif = (dateA, dateB) => `${((dateA - dateB) / 1000 / 60 / 60).toFixed(2)} Hours`;
+
 export const readTimeSchedule = () => {
     let rawdata = fs.readFileSync('time-schedule.json');
     const {from, to} = JSON.parse(rawdata);
     console.log("TimeSchedule: ", {from, to});
+    console.log("Starting after: ", hourDif(new Date(from), new Date()));
+    console.log("Ending after: ", hourDif(new Date(to), new Date()));
     return {from, to};
 }
 
