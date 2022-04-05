@@ -1,6 +1,9 @@
 import fs from 'fs';
 
 export const writeToJsonFile = (data) => {
+    if (!fs.existsSync('responses')){
+        fs.mkdirSync('responses');
+    }
     fs.writeFileSync(`responses/${new Date().toISOString().replace(/[.:]/g, '-')}.json`, data);
     console.log(`Write File: ${new Date().toISOString().replace(/[.:]/g, '-')}.json`);
 }
