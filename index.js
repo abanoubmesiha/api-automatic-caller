@@ -20,15 +20,16 @@ const timeSchedule = readTimeSchedule();
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)
 
-  fetch('http://appcorp.mobi:30081/portal/get/live-matches/489')
-    .then(response => response.json())
-    .then(data => console.log(data));
-
   const checkScheduleInterval = setInterval(
-    () => {
+    async () => {
       if (isAutomaticAPICallingActive(timeSchedule)) {
+        const data = await fetch('http://appcorp.mobi:30081/portal/get/live-matches/489', {
+          headers: {'application_key': '23209fd0-5e58-4ccb-869e-c3aef7184w70'}
+        })
+          .then(response => response.json())
+          .then(response => JSON.stringify(response));
         console.log("Make an API call...");
-        writeToJsonFile(data)
+        writeToJsonFile(data);
       }
       if (isTimeIsOver(timeSchedule)) {
         console.log("Stop API calling...");
