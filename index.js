@@ -1,5 +1,6 @@
 import express from 'express';
 import fetch from 'node-fetch';
+import 'dotenv/config';
 import {
   writeToJsonFile,
   readTimeSchedule,
@@ -10,6 +11,7 @@ import {
 
 const app = express();
 const port = 3456;
+const {API_LINK, APP_KEY} = process.env;
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
@@ -24,9 +26,7 @@ app.listen(port, () => {
   const checkScheduleInterval = setInterval(
     async () => {
       if (isAutomaticAPICallingActive(timeSchedule)) {
-        const data = await fetch('http://appcorp.mobi:30081/portal/get/live-matches/489', {
-          headers: {'application_key': '23209fd0-5e58-4ccb-869e-c3aef7184w70'}
-        })
+        const data = await fetch(API_LINK, {headers: {'application_key': API_LINK}})
           .then(response => response.json())
           .then(response => JSON.stringify(response));
         console.log("Make an API call...");
