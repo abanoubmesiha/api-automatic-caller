@@ -7,6 +7,7 @@
 node_modules/
 dist/
 responses/
+filtered-responses/
 
 # Compiled Java class files
 *.class
