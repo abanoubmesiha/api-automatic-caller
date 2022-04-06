@@ -20,7 +20,7 @@ export const dataGathering = () => {
                     .then(response => response.json())
                     .then(response => JSON.stringify(response));
                 console.log("Make an API call...");
-                writeToJsonFile(data);
+                writeToJsonFile(data, 'responses/');
             }
             if (isTimeIsOver(timeSchedule)) {
                 console.log("Stop API calling...");

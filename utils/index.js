@@ -1,10 +1,10 @@
 import fs from 'fs';
 
-export const writeToJsonFile = (data) => {
-    if (!fs.existsSync('responses')){
-        fs.mkdirSync('responses');
+export const writeToJsonFile = (data, dir) => {
+    if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir, { recursive: true });
     }
-    fs.writeFileSync(`responses/${new Date().toISOString().replace(/[.:]/g, '-')}.json`, data);
+    fs.writeFileSync(`${dir}${new Date().toISOString().replace(/[.:]/g, '-')}.json`, data);
     console.log(`Write File: ${new Date().toISOString().replace(/[.:]/g, '-')}.json`);
 }
 
