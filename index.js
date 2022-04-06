@@ -4,8 +4,9 @@ import {
   writeToJsonFile,
   readTimeSchedule,
   isAutomaticAPICallingActive,
-  isTimeIsOver
-} from './utils.js';
+  isTimeIsOver,
+  readMinutesInterval
+} from './utils/index.js';
 
 const app = express();
 const port = 3456;
@@ -14,8 +15,8 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-const data = JSON.stringify({student: '1'});
 const timeSchedule = readTimeSchedule();
+const minutesInterval = readMinutesInterval();
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)
@@ -36,6 +37,6 @@ app.listen(port, () => {
         clearInterval(checkScheduleInterval)
       }
     },
-    1000 * 60 * 5
+    1000 * 60 * minutesInterval
   );
 });
